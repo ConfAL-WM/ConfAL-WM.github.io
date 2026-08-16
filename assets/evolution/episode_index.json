@@ -1,0 +1,52 @@
+[
+  {
+    "id": "ep130",
+    "episode": "place_burger_fries_aloha-agilex_randomized_500_ep130",
+    "task": "place_burger_fries"
+  },
+  {
+    "id": "ep294",
+    "episode": "place_empty_cup_aloha-agilex_randomized_500_ep294",
+    "task": "place_empty_cup"
+  },
+  {
+    "id": "ep282",
+    "episode": "put_object_cabinet_aloha-agilex_randomized_500_ep282",
+    "task": "put_object_cabinet"
+  },
+  {
+    "id": "ep325",
+    "episode": "stack_blocks_two_aloha-agilex_randomized_500_ep325",
+    "task": "stack_blocks_two"
+  },
+  {
+    "id": "ep087",
+    "episode": "stack_bowls_three_aloha-agilex_randomized_500_ep087",
+    "task": "stack_bowls_three"
+  },
+  {
+    "id": "ep310",
+    "episode": "turn_switch_aloha-agilex_randomized_500_ep310",
+    "task": "turn_switch"
+  },
+  {
+    "id": "extra-01",
+    "episode": "blocks_ranking_size_aloha-agilex_randomized_500_ep164",
+    "task": "blocks_ranking_size"
+  },
+  {
+    "id": "extra-02",
+    "episode": "shake_bottle_aloha-agilex_randomized_500_ep295",
+    "task": "shake_bottle"
+  },
+  {
+    "id": "extra-03",
+    "episode": "hanging_mug_aloha-agilex_randomized_500_ep064",
+    "task": "hanging_mug"
+  },
+  {
+    "id": "extra-04",
+    "episode": "dump_bin_bigbin_aloha-agilex_randomized_500_ep276",
+    "task": "dump_bin_bigbin"
+  }
+]

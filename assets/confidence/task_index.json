@@ -1,0 +1,402 @@
+[
+  {
+    "id": "task-01",
+    "group": "group-01",
+    "task": "adjust_bottle",
+    "episode": "adjust_bottle_aloha-agilex_randomized_500_ep458",
+    "frames": 138,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/adjust_bottle-adjust_bottle_aloha_agilex_randomized_500_ep458-0"
+  },
+  {
+    "id": "task-02",
+    "group": "group-01",
+    "task": "beat_block_hammer",
+    "episode": "beat_block_hammer_aloha-agilex_randomized_500_ep076",
+    "frames": 110,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/beat_block_hammer-beat_block_hammer_aloha_agilex_randomized_500_ep076-0"
+  },
+  {
+    "id": "task-03",
+    "group": "group-01",
+    "task": "blocks_ranking_rgb",
+    "episode": "blocks_ranking_rgb_aloha-agilex_randomized_500_ep016",
+    "frames": 466,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/blocks_ranking_rgb-blocks_ranking_rgb_aloha_agilex_randomized_500_ep016-0"
+  },
+  {
+    "id": "task-04",
+    "group": "group-01",
+    "task": "blocks_ranking_size",
+    "episode": "blocks_ranking_size_aloha-agilex_randomized_500_ep184",
+    "frames": 462,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/blocks_ranking_size-blocks_ranking_size_aloha_agilex_randomized_500_ep184-0"
+  },
+  {
+    "id": "task-05",
+    "group": "group-01",
+    "task": "click_alarmclock",
+    "episode": "click_alarmclock_aloha-agilex_randomized_500_ep171",
+    "frames": 91,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/click_alarmclock-click_alarmclock_aloha_agilex_randomized_500_ep171-0"
+  },
+  {
+    "id": "task-06",
+    "group": "group-02",
+    "task": "click_bell",
+    "episode": "click_bell_aloha-agilex_randomized_500_ep158",
+    "frames": 75,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/click_bell-click_bell_aloha_agilex_randomized_500_ep158-0"
+  },
+  {
+    "id": "task-07",
+    "group": "group-02",
+    "task": "dump_bin_bigbin",
+    "episode": "dump_bin_bigbin_aloha-agilex_randomized_500_ep096",
+    "frames": 167,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/dump_bin_bigbin-dump_bin_bigbin_aloha_agilex_randomized_500_ep096-0"
+  },
+  {
+    "id": "task-08",
+    "group": "group-02",
+    "task": "grab_roller",
+    "episode": "grab_roller_aloha-agilex_randomized_500_ep073",
+    "frames": 91,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/grab_roller-grab_roller_aloha_agilex_randomized_500_ep073-0"
+  },
+  {
+    "id": "task-09",
+    "group": "group-02",
+    "task": "handover_block",
+    "episode": "handover_block_aloha-agilex_randomized_500_ep486",
+    "frames": 295,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/handover_block-handover_block_aloha_agilex_randomized_500_ep486-0"
+  },
+  {
+    "id": "task-10",
+    "group": "group-02",
+    "task": "handover_mic",
+    "episode": "handover_mic_aloha-agilex_randomized_500_ep362",
+    "frames": 218,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/handover_mic-handover_mic_aloha_agilex_randomized_500_ep362-0"
+  },
+  {
+    "id": "task-11",
+    "group": "group-03",
+    "task": "hanging_mug",
+    "episode": "hanging_mug_aloha-agilex_randomized_500_ep055",
+    "frames": 332,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/hanging_mug-hanging_mug_aloha_agilex_randomized_500_ep055-0"
+  },
+  {
+    "id": "task-12",
+    "group": "group-03",
+    "task": "lift_pot",
+    "episode": "lift_pot_aloha-agilex_randomized_500_ep400",
+    "frames": 114,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/lift_pot-lift_pot_aloha_agilex_randomized_500_ep400-0"
+  },
+  {
+    "id": "task-13",
+    "group": "group-03",
+    "task": "move_can_pot",
+    "episode": "move_can_pot_aloha-agilex_randomized_500_ep298",
+    "frames": 149,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/move_can_pot-move_can_pot_aloha_agilex_randomized_500_ep298-0"
+  },
+  {
+    "id": "task-14",
+    "group": "group-03",
+    "task": "move_pillbottle_pad",
+    "episode": "move_pillbottle_pad_aloha-agilex_randomized_500_ep025",
+    "frames": 133,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/move_pillbottle_pad-move_pillbottle_pad_aloha_agilex_randomized_500_ep025-0"
+  },
+  {
+    "id": "task-15",
+    "group": "group-03",
+    "task": "move_playingcard_away",
+    "episode": "move_playingcard_away_aloha-agilex_randomized_500_ep022",
+    "frames": 111,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/move_playingcard_away-move_playingcard_away_aloha_agilex_randomized_500_ep022-0"
+  },
+  {
+    "id": "task-16",
+    "group": "group-04",
+    "task": "move_stapler_pad",
+    "episode": "move_stapler_pad_aloha-agilex_randomized_500_ep058",
+    "frames": 161,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/move_stapler_pad-move_stapler_pad_aloha_agilex_randomized_500_ep058-0"
+  },
+  {
+    "id": "task-17",
+    "group": "group-04",
+    "task": "open_laptop",
+    "episode": "open_laptop_aloha-agilex_randomized_500_ep162",
+    "frames": 388,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/open_laptop-open_laptop_aloha_agilex_randomized_500_ep162-0"
+  },
+  {
+    "id": "task-18",
+    "group": "group-04",
+    "task": "open_microwave",
+    "episode": "open_microwave_aloha-agilex_randomized_500_ep164",
+    "frames": 417,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/open_microwave-open_microwave_aloha_agilex_randomized_500_ep164-0"
+  },
+  {
+    "id": "task-19",
+    "group": "group-04",
+    "task": "pick_diverse_bottles",
+    "episode": "pick_diverse_bottles_aloha-agilex_randomized_500_ep354",
+    "frames": 109,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/pick_diverse_bottles-pick_diverse_bottles_aloha_agilex_randomized_500_ep354-0"
+  },
+  {
+    "id": "task-20",
+    "group": "group-04",
+    "task": "pick_dual_bottles",
+    "episode": "pick_dual_bottles_aloha-agilex_randomized_500_ep424",
+    "frames": 128,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/pick_dual_bottles-pick_dual_bottles_aloha_agilex_randomized_500_ep424-0"
+  },
+  {
+    "id": "task-21",
+    "group": "group-05",
+    "task": "place_a2b_left",
+    "episode": "place_a2b_left_aloha-agilex_randomized_500_ep022",
+    "frames": 138,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_a2b_left-place_a2b_left_aloha_agilex_randomized_500_ep022-0"
+  },
+  {
+    "id": "task-22",
+    "group": "group-05",
+    "task": "place_a2b_right",
+    "episode": "place_a2b_right_aloha-agilex_randomized_500_ep388",
+    "frames": 141,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_a2b_right-place_a2b_right_aloha_agilex_randomized_500_ep388-0"
+  },
+  {
+    "id": "task-23",
+    "group": "group-05",
+    "task": "place_bread_basket",
+    "episode": "place_bread_basket_aloha-agilex_randomized_500_ep148",
+    "frames": 223,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_bread_basket-place_bread_basket_aloha_agilex_randomized_500_ep148-0"
+  },
+  {
+    "id": "task-24",
+    "group": "group-05",
+    "task": "place_bread_skillet",
+    "episode": "place_bread_skillet_aloha-agilex_randomized_500_ep489",
+    "frames": 167,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_bread_skillet-place_bread_skillet_aloha_agilex_randomized_500_ep489-0"
+  },
+  {
+    "id": "task-25",
+    "group": "group-05",
+    "task": "place_burger_fries",
+    "episode": "place_burger_fries_aloha-agilex_randomized_500_ep443",
+    "frames": 239,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_burger_fries-place_burger_fries_aloha_agilex_randomized_500_ep443-0"
+  },
+  {
+    "id": "task-26",
+    "group": "group-06",
+    "task": "place_can_basket",
+    "episode": "place_can_basket_aloha-agilex_randomized_500_ep478",
+    "frames": 264,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_can_basket-place_can_basket_aloha_agilex_randomized_500_ep478-0"
+  },
+  {
+    "id": "task-27",
+    "group": "group-06",
+    "task": "place_cans_plasticbox",
+    "episode": "place_cans_plasticbox_aloha-agilex_randomized_500_ep372",
+    "frames": 280,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_cans_plasticbox-place_cans_plasticbox_aloha_agilex_randomized_500_ep372-0"
+  },
+  {
+    "id": "task-28",
+    "group": "group-06",
+    "task": "place_container_plate",
+    "episode": "place_container_plate_aloha-agilex_randomized_500_ep290",
+    "frames": 153,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_container_plate-place_container_plate_aloha_agilex_randomized_500_ep290-0"
+  },
+  {
+    "id": "task-29",
+    "group": "group-06",
+    "task": "place_dual_shoes",
+    "episode": "place_dual_shoes_aloha-agilex_randomized_500_ep160",
+    "frames": 249,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_dual_shoes-place_dual_shoes_aloha_agilex_randomized_500_ep160-0"
+  },
+  {
+    "id": "task-30",
+    "group": "group-06",
+    "task": "place_empty_cup",
+    "episode": "place_empty_cup_aloha-agilex_randomized_500_ep313",
+    "frames": 169,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_empty_cup-place_empty_cup_aloha_agilex_randomized_500_ep313-0"
+  },
+  {
+    "id": "task-31",
+    "group": "group-07",
+    "task": "place_fan",
+    "episode": "place_fan_aloha-agilex_randomized_500_ep408",
+    "frames": 143,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_fan-place_fan_aloha_agilex_randomized_500_ep408-0"
+  },
+  {
+    "id": "task-32",
+    "group": "group-07",
+    "task": "place_mouse_pad",
+    "episode": "place_mouse_pad_aloha-agilex_randomized_500_ep191",
+    "frames": 147,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_mouse_pad-place_mouse_pad_aloha_agilex_randomized_500_ep191-0"
+  },
+  {
+    "id": "task-33",
+    "group": "group-07",
+    "task": "place_object_basket",
+    "episode": "place_object_basket_aloha-agilex_randomized_500_ep009",
+    "frames": 260,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_object_basket-place_object_basket_aloha_agilex_randomized_500_ep009-0"
+  },
+  {
+    "id": "task-34",
+    "group": "group-07",
+    "task": "place_object_scale",
+    "episode": "place_object_scale_aloha-agilex_randomized_500_ep114",
+    "frames": 141,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_object_scale-place_object_scale_aloha_agilex_randomized_500_ep114-0"
+  },
+  {
+    "id": "task-35",
+    "group": "group-07",
+    "task": "place_object_stand",
+    "episode": "place_object_stand_aloha-agilex_randomized_500_ep451",
+    "frames": 135,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_object_stand-place_object_stand_aloha_agilex_randomized_500_ep451-0"
+  },
+  {
+    "id": "task-36",
+    "group": "group-08",
+    "task": "place_phone_stand",
+    "episode": "place_phone_stand_aloha-agilex_randomized_500_ep308",
+    "frames": 123,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_phone_stand-place_phone_stand_aloha_agilex_randomized_500_ep308-0"
+  },
+  {
+    "id": "task-37",
+    "group": "group-08",
+    "task": "place_shoe",
+    "episode": "place_shoe_aloha-agilex_randomized_500_ep238",
+    "frames": 166,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/place_shoe-place_shoe_aloha_agilex_randomized_500_ep238-0"
+  },
+  {
+    "id": "task-38",
+    "group": "group-08",
+    "task": "press_stapler",
+    "episode": "press_stapler_aloha-agilex_randomized_500_ep183",
+    "frames": 114,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/press_stapler-press_stapler_aloha_agilex_randomized_500_ep183-0"
+  },
+  {
+    "id": "task-39",
+    "group": "group-08",
+    "task": "put_bottles_dustbin",
+    "episode": "put_bottles_dustbin_aloha-agilex_randomized_500_ep111",
+    "frames": 578,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/put_bottles_dustbin-put_bottles_dustbin_aloha_agilex_randomized_500_ep111-0"
+  },
+  {
+    "id": "task-40",
+    "group": "group-08",
+    "task": "put_object_cabinet",
+    "episode": "put_object_cabinet_aloha-agilex_randomized_500_ep158",
+    "frames": 269,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/put_object_cabinet-put_object_cabinet_aloha_agilex_randomized_500_ep158-0"
+  },
+  {
+    "id": "task-41",
+    "group": "group-09",
+    "task": "rotate_qrcode",
+    "episode": "rotate_qrcode_aloha-agilex_randomized_500_ep223",
+    "frames": 149,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/rotate_qrcode-rotate_qrcode_aloha_agilex_randomized_500_ep223-0"
+  },
+  {
+    "id": "task-42",
+    "group": "group-09",
+    "task": "scan_object",
+    "episode": "scan_object_aloha-agilex_randomized_500_ep076",
+    "frames": 168,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/scan_object-scan_object_aloha_agilex_randomized_500_ep076-0"
+  },
+  {
+    "id": "task-43",
+    "group": "group-09",
+    "task": "shake_bottle",
+    "episode": "shake_bottle_aloha-agilex_randomized_500_ep065",
+    "frames": 251,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/shake_bottle-shake_bottle_aloha_agilex_randomized_500_ep065-0"
+  },
+  {
+    "id": "task-44",
+    "group": "group-09",
+    "task": "shake_bottle_horizontally",
+    "episode": "shake_bottle_horizontally_aloha-agilex_randomized_500_ep266",
+    "frames": 276,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/shake_bottle_horizontally-shake_bottle_horizontally_aloha_agilex_randomized_500_ep266-0"
+  },
+  {
+    "id": "task-45",
+    "group": "group-09",
+    "task": "stack_blocks_three",
+    "episode": "stack_blocks_three_aloha-agilex_randomized_500_ep066",
+    "frames": 472,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/stack_blocks_three-stack_blocks_three_aloha_agilex_randomized_500_ep066-0"
+  },
+  {
+    "id": "task-46",
+    "group": "group-10",
+    "task": "stack_blocks_two",
+    "episode": "stack_blocks_two_aloha-agilex_randomized_500_ep254",
+    "frames": 301,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/stack_blocks_two-stack_blocks_two_aloha_agilex_randomized_500_ep254-0"
+  },
+  {
+    "id": "task-47",
+    "group": "group-10",
+    "task": "stack_bowls_three",
+    "episode": "stack_bowls_three_aloha-agilex_randomized_500_ep259",
+    "frames": 467,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/stack_bowls_three-stack_bowls_three_aloha_agilex_randomized_500_ep259-0"
+  },
+  {
+    "id": "task-48",
+    "group": "group-10",
+    "task": "stack_bowls_two",
+    "episode": "stack_bowls_two_aloha-agilex_randomized_500_ep407",
+    "frames": 290,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/stack_bowls_two-stack_bowls_two_aloha_agilex_randomized_500_ep407-0"
+  },
+  {
+    "id": "task-49",
+    "group": "group-10",
+    "task": "stamp_seal",
+    "episode": "stamp_seal_aloha-agilex_randomized_500_ep183",
+    "frames": 142,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/stamp_seal-stamp_seal_aloha_agilex_randomized_500_ep183-0"
+  },
+  {
+    "id": "task-50",
+    "group": "group-10",
+    "task": "turn_switch",
+    "episode": "turn_switch_aloha-agilex_randomized_500_ep025",
+    "frames": 98,
+    "gt_source": "/share/project/robocoin/hywu/lx/datasets/RoboTwin2.0/aloha-agilex_rand_500/turn_switch-turn_switch_aloha_agilex_randomized_500_ep025-0"
+  }
+]
