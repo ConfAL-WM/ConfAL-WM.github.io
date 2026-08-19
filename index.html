@@ -162,6 +162,15 @@ a{color:inherit;text-decoration:none} button{font:inherit} ::selection{backgroun
 @media(max-width:1250px){.confidence-matrix{min-width:760px;grid-template-columns:104px repeat(6,minmax(98px,1fr))}.figure6-wrap{min-width:720px}}
 @media(max-width:860px){.confidence-matrix{min-width:700px}.figure6-wrap{min-width:680px}.figure6-legend{font-size:9px;column-gap:10px}}
 
+/* Overview teaser: figure / video toggle. */
+.ov-toggle{display:flex;justify-content:center;gap:8px;margin:2px 0 12px}
+.ov-frame .ov-media{display:none;width:100%;height:100%;object-fit:contain;background:#030508}
+.ov-frame[data-ov="figure"] .ov-fig{display:block}
+.ov-frame[data-ov="video"] .ov-vid{display:block}
+.ov-frame[data-ov="figure"] .todo-overlay{display:none!important}
+.ov-frame[data-ov="video"] .todo-overlay{display:grid!important}
+.ov-frame[data-ov="video"].vid-ready .todo-overlay{display:none!important}
+
 /* Section-specific stationary shells. */
 #active-learning .result-shell,#resources .resource-panel,#confidence-viz .matrix-scroll,#evolution .evolution-row{will-change:auto}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
@@ -200,7 +209,15 @@ a{color:inherit;text-decoration:none} button{font:inherit} ::selection{backgroun
 <section class="section reveal" id="overview">
   <div class="section-head"><div><div class="kicker">01 · Overview</div><h2>Confidence closes the loop.</h2></div><div class="section-note">Estimate where the world model is unreliable, spend the post-training budget there, then strengthen supervision on the difficult frames and patches.</div></div>
   <div class="teaser card">
-    <div class="asset-frame" data-asset="assets/videos/teaser.mp4"><video muted loop autoplay playsinline preload="metadata" data-src="assets/videos/teaser.mp4"></video><div class="todo-overlay">TODO · Overview / teaser video<br><span class="muted">assets/videos/teaser.mp4</span></div></div>
+    <div class="ov-toggle">
+      <button class="ctrl ov-btn active" data-ov-media="figure"><span aria-hidden="true">🖼️</span> Figure</button>
+      <button class="ctrl ov-btn" data-ov-media="video"><span aria-hidden="true">🎬</span> Video</button>
+    </div>
+    <div class="asset-frame ov-frame" id="overview-frame" data-ov="figure">
+      <img class="ov-media ov-fig" src="assets/figures/overview_introduction.png" alt="ConfAL-WM overview figure" loading="lazy">
+      <video class="ov-media ov-vid" muted loop autoplay playsinline preload="metadata" data-src="assets/videos/teaser.mp4"></video>
+      <div class="todo-overlay">TODO · Overview / teaser video<br><span class="muted">assets/videos/teaser.mp4</span></div>
+    </div>
   </div>
   <div class="contrib-grid">
     <article class="contrib card"><b>UNet-native confidence</b><p>Decoder-feature confidence probe with an EMA-calibrated training target for dense latent-space reliability estimation.</p></article>
@@ -371,6 +388,15 @@ function wireVideo(v){if(!v)return;const src=v.dataset.src;if(src){v.src=src;v.a
 document.querySelectorAll('video[data-src]').forEach(wireVideo);
 const videoObs=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.play().catch(()=>{})}else v.pause()}),{rootMargin:'180px'});document.querySelectorAll('video').forEach(v=>videoObs.observe(v));
 document.querySelectorAll('.asset-frame img').forEach(img=>{if(img.complete&&img.naturalWidth)img.closest('.asset-frame')?.classList.add('loaded');img.addEventListener('load',()=>img.closest('.asset-frame')?.classList.add('loaded'));img.addEventListener('error',()=>{img.style.display='none'})});
+
+// Overview teaser: figure / video toggle (teaser video not released yet).
+document.querySelectorAll('.ov-btn').forEach(b=>b.addEventListener('click',()=>{
+  const frame=document.getElementById('overview-frame'); if(!frame)return;
+  document.querySelectorAll('.ov-btn').forEach(x=>x.classList.toggle('active',x===b));
+  frame.dataset.ov=b.dataset.ovMedia;
+}));
+const ovVid=document.querySelector('#overview-frame video');
+if(ovVid)ovVid.addEventListener('loadeddata',()=>document.getElementById('overview-frame')?.classList.add('vid-ready'),{once:true});
 
 // Hero: action-conditioned trajectory / future-state line field.
 (()=>{const c=document.getElementById('hero-canvas'),ctx=c.getContext('2d');let W,H,dpr=Math.min(devicePixelRatio||1,2),mx=.5,my=.5,t=0;const paths=Array.from({length:5},(_,i)=>({y:.12+i*.17+Math.random()*.03,phase:Math.random()*6.28,speed:.28+Math.random()*.55,amp:.025+Math.random()*.045,alpha:.21+Math.random()*.14,hue:i%3}));function resize(){W=c.clientWidth;H=c.clientHeight;c.width=W*dpr;c.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)} addEventListener('resize',resize);resize();addEventListener('pointermove',e=>{mx=e.clientX/innerWidth;my=e.clientY/innerHeight},{passive:true});function draw(){t+=.008;ctx.clearRect(0,0,W,H);ctx.save();ctx.translate((mx-.5)*8,(my-.5)*6);const cols=['85,215,255','155,124,255','255,189,102'];paths.forEach((p,i)=>{const y0=p.y*H;ctx.beginPath();for(let s=0;s<=80;s++){const x=s/80*W;const bend=Math.sin(s*.15+p.phase+t*p.speed)*p.amp*H;const attract=(.5-Math.abs(s/80-.5))*18*Math.sin(t+i);const y=y0+bend+attract;if(!s)ctx.moveTo(x,y);else ctx.lineTo(x,y)}ctx.strokeStyle=`rgba(${cols[p.hue]},${p.alpha})`;ctx.lineWidth=i%4===0?2.6:1.7;ctx.stroke();if(i%7===0){const q=(t*p.speed*.22+p.phase/6.28)%1,x=q*W,y=y0+Math.sin(q*80*.15+p.phase+t*p.speed)*p.amp*H;ctx.fillStyle=`rgba(${cols[p.hue]},.34)`;ctx.beginPath();ctx.arc(x,y,2.4,0,6.28);ctx.fill()}}); // reference/future planes
