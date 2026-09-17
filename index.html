@@ -167,14 +167,17 @@ a{color:inherit;text-decoration:none} button{font:inherit} ::selection{backgroun
 @media(max-width:1250px){.confidence-matrix{min-width:760px;grid-template-columns:104px repeat(6,minmax(98px,1fr))}.figure6-wrap{min-width:720px}}
 @media(max-width:860px){.confidence-matrix{min-width:700px}.figure6-wrap{min-width:680px}.figure6-legend{font-size:9px;column-gap:10px}}
 
-/* Overview teaser: figure / video toggle + floating sound button. */
+/* Overview teaser: figure / video toggle + sound chip pinned to the card's top-left. */
 .ov-toggle{display:flex;justify-content:center;gap:8px;margin:2px 0 12px}
 .ov-frame .ov-media{display:none;width:100%;height:100%;object-fit:contain;background:#030508}
 .ov-frame[data-ov="figure"] .ov-fig{display:block}
 .ov-frame[data-ov="video"] .ov-vid{display:block}
-.ov-sound{position:absolute;z-index:4;top:10px;left:10px;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid var(--line2);background:rgba(7,10,15,.74);backdrop-filter:blur(12px);color:#e8f1fa;border-radius:999px;font-size:1.05rem;line-height:1;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.32);transition:border-color .2s,background .2s,transform .2s}
+.teaser.card{position:relative}
+.ov-sound-row{position:absolute;z-index:5;top:15px;left:22px;display:flex;align-items:center;gap:8px}
+.ov-sound{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--line2);background:rgba(7,10,15,.74);backdrop-filter:blur(12px);color:#e8f1fa;border-radius:999px;font-size:1.02rem;line-height:1;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.32);transition:border-color .2s,background .2s,transform .2s}
 .ov-sound:hover{border-color:rgba(85,215,255,.5);background:rgba(85,215,255,.14);transform:translateY(-1px)}
-.ov-frame[data-ov="figure"] .ov-sound{display:none}
+.ov-sound-hint{font-size:.7rem;font-weight:800;letter-spacing:.02em;color:#9fd8ef;text-shadow:0 2px 10px rgba(0,0,0,.55);pointer-events:none;white-space:nowrap}
+@media(max-width:950px){.ov-sound-hint{display:none}}
 
 /* Section-specific stationary shells. */
 #active-learning .result-shell,#resources .resource-panel,#confidence-viz .matrix-scroll,#evolution .evolution-row{will-change:auto}
@@ -214,6 +217,10 @@ a{color:inherit;text-decoration:none} button{font:inherit} ::selection{backgroun
 <section class="section reveal" id="overview">
   <div class="section-head"><div><div class="kicker">01 · Overview</div><h2>Confidence closes the loop.</h2></div><div class="section-note">Estimate where the world model is unreliable, spend the post-training budget there, then strengthen supervision on the difficult frames and patches.</div></div>
   <div class="teaser card">
+    <div class="ov-sound-row" id="overview-sound-row">
+      <button class="ov-sound" id="overview-sound" type="button" aria-pressed="true" title="Mute teaser" aria-label="Toggle teaser sound"><span aria-hidden="true">🔊</span></button>
+      <span class="ov-sound-hint">Turn on sound for the full experience</span>
+    </div>
     <div class="ov-toggle">
       <button class="ctrl ov-btn" data-ov-media="figure"><span aria-hidden="true">🖼️</span> Figure</button>
       <button class="ctrl ov-btn active" data-ov-media="video"><span aria-hidden="true">🎬</span> Video</button>
@@ -221,7 +228,6 @@ a{color:inherit;text-decoration:none} button{font:inherit} ::selection{backgroun
     <div class="asset-frame ov-frame" id="overview-frame" data-ov="video">
       <img class="ov-media ov-fig" src="assets/figures/overview_introduction.png" alt="ConfAL-WM overview figure" loading="lazy">
       <video class="ov-media ov-vid" id="overview-video" controls loop playsinline preload="metadata" src="assets/video/ConfAL-WM.mp4"></video>
-      <button class="ov-sound" id="overview-sound" type="button" aria-pressed="true" title="Mute teaser" aria-label="Toggle teaser sound"><span aria-hidden="true">🔊</span></button>
     </div>
   </div>
   <div class="contrib-grid">
@@ -394,13 +400,14 @@ document.querySelectorAll('video[data-src]').forEach(wireVideo);
 const videoObs=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.play().catch(()=>{})}else v.pause()}),{rootMargin:'180px'});document.querySelectorAll('video').forEach(v=>videoObs.observe(v));
 document.querySelectorAll('.asset-frame img').forEach(img=>{if(img.complete&&img.naturalWidth)img.closest('.asset-frame')?.classList.add('loaded');img.addEventListener('load',()=>img.closest('.asset-frame')?.classList.add('loaded'));img.addEventListener('error',()=>{img.style.display='none'})});
 
-// Overview teaser: video by default, figure/video toggle, sound button, autoplay only when scrolled into view.
-const ovFrame=document.getElementById('overview-frame'),ovVideo=document.getElementById('overview-video'),ovSound=document.getElementById('overview-sound');
+// Overview teaser: video by default, figure/video toggle, sound chip on the card, autoplay only when scrolled into view.
+const ovFrame=document.getElementById('overview-frame'),ovVideo=document.getElementById('overview-video'),ovSound=document.getElementById('overview-sound'),ovSoundRow=document.getElementById('overview-sound-row');
 if(ovFrame&&ovVideo&&ovSound){
+  const ovSyncSoundRow=()=>{if(ovSoundRow)ovSoundRow.hidden=ovFrame.dataset.ov!=='video'};
   const ovSyncSound=()=>{const on=!ovVideo.muted;ovSound.querySelector('span').textContent=on?'🔊':'🔇';ovSound.setAttribute('aria-pressed',String(on));ovSound.title=on?'Mute teaser':'Unmute teaser'};
   ovSound.addEventListener('click',()=>{ovVideo.muted=!ovVideo.muted});
   ovVideo.addEventListener('volumechange',ovSyncSound);
-  ovSyncSound();
+  ovSyncSound();ovSyncSoundRow();
   let ovVisible=false,ovUserPaused=false,ovAutoPausing=false;
   ovVideo.addEventListener('pause',()=>{if(!ovAutoPausing)ovUserPaused=true});
   ovVideo.addEventListener('play',()=>{ovUserPaused=false});
@@ -409,6 +416,7 @@ if(ovFrame&&ovVideo&&ovSound){
   document.querySelectorAll('.ov-btn').forEach(b=>b.addEventListener('click',()=>{
     document.querySelectorAll('.ov-btn').forEach(x=>x.classList.toggle('active',x===b));
     ovFrame.dataset.ov=b.dataset.ovMedia;
+    ovSyncSoundRow();
     if(ovFrame.dataset.ov==='figure')ovVideo.pause();
     else if(ovVisible&&!ovUserPaused)ovTryPlay();
   }));
