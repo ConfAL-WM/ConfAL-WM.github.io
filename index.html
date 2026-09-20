@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="description" content="ConfAL-WM: Confidence-Guided Active Learning for Action-Conditioned World Models." />
-  <meta name="theme-color" content="#07090d" />
+  <meta name="theme-color" content="#f5f7fb" />
   <script>
-    // Apply the saved preference before painting; first-time visitors see dark mode.
+    // Apply the saved preference before painting; first-time visitors see light mode.
     (() => {
-      let theme = 'dark';
-      try { if (localStorage.getItem('confal-wm-theme') === 'light') theme = 'light'; } catch {}
+      let theme = 'light';
+      try { if (localStorage.getItem('confal-wm-theme') === 'dark') theme = 'dark'; } catch {}
       document.documentElement.dataset.theme = theme;
       document.querySelector('meta[name="theme-color"]').content = theme === 'light' ? '#f5f7fb' : '#07090d';
     })();
@@ -251,7 +251,7 @@ a{color:inherit;text-decoration:none} button{font:inherit} ::selection{backgroun
     <div class="nav-links" id="navLinks">
       <a class="nav-link" href="#overview">Overview</a><a class="nav-link" href="#method">Method</a><a class="nav-link" href="#confidence-viz">Confidence</a><a class="nav-link" href="#active-learning">Active Learning</a><a class="nav-link" href="#evolution">Evolution</a><a class="nav-link" href="#confidence-eval">Evaluation</a><a class="nav-link" href="#resources">Models & Data</a><a class="nav-link" href="#citation">Citation</a>
     </div>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
       <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
       <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13.1A9 9 0 0 1 10.9 3.1a9 9 0 1 0 10 10Z"/></svg>
     </button>
@@ -455,7 +455,7 @@ a{color:inherit;text-decoration:none} button{font:inherit} ::selection{backgroun
   });
   window.addEventListener('storage', event => {
     if (event.key === 'confal-wm-theme' || event.key === null) {
-      applyTheme(event.newValue === 'light' ? 'light' : 'dark');
+      applyTheme(event.newValue === 'dark' ? 'dark' : 'light');
     }
   });
 })();
