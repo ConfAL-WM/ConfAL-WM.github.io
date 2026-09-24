@@ -25,25 +25,34 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
 <style>
+@property --bg{syntax:"<color>";inherits:true;initial-value:#06080c}
+@property --bg2{syntax:"<color>";inherits:true;initial-value:#0a0d13}
+@property --surface{syntax:"<color>";inherits:true;initial-value:rgba(18,23,32,.76)}
+@property --surface2{syntax:"<color>";inherits:true;initial-value:rgba(12,16,23,.92)}
+@property --line{syntax:"<color>";inherits:true;initial-value:rgba(255,255,255,.095)}
+@property --line2{syntax:"<color>";inherits:true;initial-value:rgba(255,255,255,.16)}
+@property --text{syntax:"<color>";inherits:true;initial-value:#f4f7fb}
+@property --muted{syntax:"<color>";inherits:true;initial-value:#98a3b5}
 :root{
   --bg:#06080c; --bg2:#0a0d13; --surface:rgba(18,23,32,.76); --surface2:rgba(12,16,23,.92);
   --line:rgba(255,255,255,.095); --line2:rgba(255,255,255,.16); --text:#f4f7fb; --muted:#98a3b5;
   --cyan:#55d7ff; --blue:#6c8cff; --violet:#9b7cff; --amber:#ffbd66; --green:#65efad; --red:#ff7888;
   --rank1:rgba(57,211,126,.16); --rank2:rgba(255,205,84,.14); --rank3:rgba(255,108,121,.12);
   --shadow:0 24px 80px rgba(0,0,0,.34); --radius:22px; --page:min(88vw,1540px);
+  transition:--bg .42s ease,--bg2 .42s ease,--surface .42s ease,--surface2 .42s ease,--line .42s ease,--line2 .42s ease,--text .32s ease,--muted .32s ease;
 }
-*{box-sizing:border-box} html{scroll-behavior:smooth;scroll-padding-top:92px;background:var(--bg)}
+*{box-sizing:border-box} html{scroll-behavior:smooth;scroll-padding-top:92px;background:var(--bg);transition:background-color .42s ease}
 body{margin:0;background:
  radial-gradient(900px 520px at 8% 0%,rgba(86,213,255,.08),transparent 60%),
  radial-gradient(800px 500px at 94% 12%,rgba(154,124,255,.07),transparent 62%),var(--bg);
- color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+ color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;transition:background-color .42s ease,color .32s ease;
  line-height:1.55;overflow-x:hidden}
 a{color:inherit;text-decoration:none} button{font:inherit} ::selection{background:rgba(85,215,255,.25)}
 .progress-track{position:fixed;z-index:120;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.04)}
 .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--amber));box-shadow:0 0 18px rgba(85,215,255,.6)}
 .nav-shell{position:fixed;z-index:110;top:3px;left:0;right:0;padding:12px 2vw;pointer-events:none}
 .nav{pointer-events:auto;margin:auto;width:var(--page);display:flex;align-items:center;justify-content:space-between;gap:18px;padding:9px 12px 9px 18px;border:1px solid var(--line);background:rgba(7,10,15,.72);backdrop-filter:blur(18px);border-radius:999px;box-shadow:0 10px 36px rgba(0,0,0,.2)}
-.brand{font-weight:820;letter-spacing:-.03em;white-space:nowrap}.brand span{color:var(--cyan)}
+.brand{display:inline-flex;align-items:center;gap:8px;font-weight:820;letter-spacing:-.03em;white-space:nowrap}.brand-icon{width:22px;height:22px;display:block;object-fit:contain;border-radius:5px}.brand span{color:var(--cyan)}
 .nav-links{display:flex;gap:4px;overflow:auto;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
 .nav-link{padding:8px 11px;border-radius:999px;color:var(--muted);font-size:.78rem;font-weight:700;white-space:nowrap;transition:.2s}
 .nav-link:hover,.nav-link.active{color:var(--text);background:rgba(255,255,255,.07)}
@@ -97,7 +106,7 @@ a{color:inherit;text-decoration:none} button{font:inherit} ::selection{backgroun
 .evolution-row{grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);gap:14px;padding:13px}.episode-chart-shell{border:1px solid var(--line);border-radius:14px;background:#f6f8fa;overflow:hidden;min-width:0;padding:6px}.episode-chart-svg{display:block;width:100%;height:auto;min-width:0;background:#fff;border-radius:10px}.evo-axis{opacity:0;animation:plotAxisIn .4s .08s both}.evo-bar{opacity:0;transform:scaleY(0);transform-box:fill-box;transform-origin:center bottom;animation:plotBarRise .68s .55s cubic-bezier(.2,.8,.2,1) both}.evo-arrow{opacity:0;animation:plotArrowIn .48s 1.36s both}
 
 .resource-panel .agi-strip{display:none!important}.citation{max-width:820px;margin:0 auto;padding:24px 26px}.citation pre{font-size:.76rem}.copy{top:12px;right:12px}
-@media(max-width:720px){:root{--page:92vw}.nav{border-radius:18px;padding:8px 10px}.brand{font-size:.86rem}.nav-links{max-width:70vw}.nav-link{font-size:.68rem;padding:7px 9px}.hero{padding-top:112px}.title{font-size:clamp(3.2rem,18vw,5.2rem)}.subtitle{font-size:1rem}.authors{font-size:.78rem}.section{padding:74px 0}.kicker{font-size:1.22rem}.section h2{font-size:1rem}.contrib-grid{grid-template-columns:1fr}.method-figure .asset-frame{min-height:250px}.gallery-toolbar,.result-toolbar{align-items:flex-start;flex-direction:column}.resource-grid{grid-template-columns:1fr}.agi-strip{grid-template-columns:1fr}.stage{min-height:440px}.chart-stack{min-height:410px}.pill-link{padding:9px 12px;font-size:.76rem}.pager-foot{display:grid;justify-items:center}.pager-foot .replay-all{position:static;transform:none;margin:0 0 6px}}
+@media(max-width:720px){:root{--page:92vw}.nav{border-radius:18px;padding:8px 10px}.brand{font-size:.86rem;gap:6px}.brand-icon{width:20px;height:20px}.nav-links{max-width:70vw}.nav-link{font-size:.68rem;padding:7px 9px}.hero{padding-top:112px}.title{font-size:clamp(3.2rem,18vw,5.2rem)}.subtitle{font-size:1rem}.authors{font-size:.78rem}.section{padding:74px 0}.kicker{font-size:1.22rem}.section h2{font-size:1rem}.contrib-grid{grid-template-columns:1fr}.method-figure .asset-frame{min-height:250px}.gallery-toolbar,.result-toolbar{align-items:flex-start;flex-direction:column}.resource-grid{grid-template-columns:1fr}.agi-strip{grid-template-columns:1fr}.stage{min-height:440px}.chart-stack{min-height:410px}.pill-link{padding:9px 12px;font-size:.76rem}.pager-foot{display:grid;justify-items:center}.pager-foot .replay-all{position:static;transform:none;margin:0 0 6px}}
 
 /* v3 layout, interaction, and animation refinements */
 :root{--page:min(70vw,1320px)}
@@ -271,7 +280,7 @@ a{color:inherit;text-decoration:none} button{font:inherit} ::selection{backgroun
 <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
 <div class="nav-shell">
   <nav class="nav" aria-label="Project page sections">
-    <a class="brand" href="#home">ConfAL<span>-WM</span></a>
+    <a class="brand" href="#home"><img class="brand-icon" src="assets/meta/favicon.png" alt="" aria-hidden="true">ConfAL<span>-WM</span></a>
     <div class="nav-links" id="navLinks">
       <a class="nav-link" href="#overview">Overview</a><a class="nav-link" href="#method">Method</a><a class="nav-link" href="#confidence-viz">Confidence</a><a class="nav-link" href="#active-learning">Active Learning</a><a class="nav-link" href="#evolution">Evolution</a><a class="nav-link" href="#confidence-eval">Evaluation</a><a class="nav-link" href="#resources">Models & Data</a><a class="nav-link" href="#citation">Citation</a>
     </div>
