@@ -136,7 +136,7 @@ def chapter():
     ablations = subviews('ablations', [
         ('features','Feature comparison',t9 + figure('Figure 15 · Shared-threshold performance',new+'fig15-shared-thresholds.webp',
             'All four probes answer the same nine error thresholds. Fixed and EMA curves nearly overlap, while changing from bottleneck to decoder features produces the larger improvement.')),
-        ('ranges','Threshold ranges',t10 + '<p class="experiment-footnote">Q denotes a training-error quantile. EMA-Qinit starts at [Q<sub>.10</sub>, Q<sub>.90</sub>]; green cells mark the best value within each feature group.</p>'),
+        ('ranges','Threshold ranges',t10 + '<p class="experiment-footnote">Q denotes a training-error quantile. EMA-Qinit starts at [Q<sub>.10</sub>, Q<sub>.90</sub>]; bold values mark the best result within each feature group.</p>'),
         ('paired','Paired task comparisons',t11 + figure('Figure 16 · Feature and supervision effects',new+'fig16-paired-effects.webp',
             'The error bars compare paired Brier differences across held-out tasks. Decoder features show a much larger benefit than the difference between EMA and tuned fixed supervision; the two panels use different horizontal scales.')),
         ('noise','Noise-range transfer',figure('Figure 17 · Evaluation at lower noise',new+'fig17-noise-transfer.webp',
@@ -175,7 +175,7 @@ def chapter():
     budget = subviews('budget',[
         ('curves','Budget–performance curves',figure('Figure 21 · Nine metrics across data budgets',new+'fig21-budget-curves.webp',
             'Confidence and random selection receive the same 750 updates, with the full-pool model shown as a reference. More data does not consistently improve every metric under this short schedule, and confidence’s broadest advantage appears at 10%.')),
-        ('results','Aggregate results & cost',t13 + '<p class="experiment-footnote">Green marks the higher score within each confidence/random pair. Reconstruction, Scene and Motion use 62 episodes; CLIP/BLEU use 56, and Semantics averages the available component means.</p>'),
+        ('results','Aggregate results & cost',t13 + '<p class="experiment-footnote">Bold marks the higher score within each confidence/random pair. Reconstruction, Scene and Motion use 62 episodes; CLIP/BLEU use 56, and Semantics averages the available component means.</p>'),
         ('paired','Paired differences',t14 + '<p class="experiment-footnote">10,000 episode-bootstrap resamples. Reconstruction, Scene and Motion use 62 common episodes; Semantics uses the 56-episode intersection, so paired differences can differ slightly from subtracting Table 13.</p>'),
     ])
     chips = ('<div class="metric-chips"><span class="chip">Patch / Frame / Task Spearman <b>0.540 / 0.590 / 0.595</b></span>'
@@ -184,9 +184,9 @@ def chapter():
     parts = [
         ('why','Why Confidence?',chips+why),
         ('ablations','Feature &amp; Threshold Ablations',
-         '<p class="experiment-protocol">Appendix B.3 · Frozen EVAC-v1, identical probe capacity, 6,000 updates and seed 42. Evaluation uses 250 held-out episodes across 43 tasks; the fixed range is chosen on a separate calibration split.</p>'+ablations),
+         '<p class="experiment-protocol">Appendix B.3 · How feature choice and threshold supervision affect confidence quality.</p>'+ablations),
         ('budget','Data-Budget Sensitivity',
-         '<p class="experiment-protocol">Appendix B.5 · 750 updates, effective batch size 16, seed 42 and no loss weighting. Confidence and uniform-task random selection share the quota allocator; a fixed 64-episode validation subset is used, with metric-specific valid counts below.</p>'+budget),
+         '<p class="experiment-protocol">Appendix B.5 · Confidence versus random selection across data budgets, with the same training steps.</p>'+budget),
     ]
     buttons, panels = [], []
     for i,(key,label,content) in enumerate(parts):
