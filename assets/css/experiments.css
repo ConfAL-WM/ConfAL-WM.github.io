@@ -1,0 +1,30 @@
+.experiment-tabs{display:flex;align-items:center;gap:10px;overflow-x:auto;scrollbar-width:thin;padding:4px 2px 8px;margin:0 0 16px}
+.experiment-tab{flex:0 0 auto;white-space:nowrap;padding:13px 20px;border:1px solid var(--line2);border-radius:999px;background:var(--surface2);color:var(--muted);font-weight:800;font-size:.84rem;cursor:pointer;transition:transform .18s,border-color .18s}
+.experiment-tab:hover{transform:translateY(-2px);border-color:var(--cyan);color:var(--text)}
+.experiment-tab.active{background:rgba(85,215,255,.1);color:var(--text);border-color:rgba(85,215,255,.45)}
+.experiment-tab:focus-visible,#confidence-eval .eval-tab:focus-visible,#confidence-eval .eval-fig a:focus-visible,.experiment-table:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.experiment-panel{min-width:0}
+.experiment-panel[hidden],#confidence-eval .eval-view[hidden]{display:none!important}
+.experiment-protocol{max-width:1050px;margin:0 0 20px;color:var(--muted);font-size:.86rem;line-height:1.7}
+#confidence-eval .eval-shell{grid-template-columns:210px minmax(0,1fr);align-items:start}
+#confidence-eval .eval-display,#confidence-eval .eval-view{min-width:0}
+#confidence-eval .eval-view{gap:24px}
+#confidence-eval .eval-fig a{display:block;border-radius:12px}
+#confidence-eval figcaption{margin:12px 2px 0;text-align:left;font-size:.82rem;line-height:1.65;font-weight:400;color:var(--muted)}
+#confidence-eval figcaption strong{display:block;margin-bottom:4px;color:var(--text);font-weight:800;font-size:.86rem}
+#confidence-eval figcaption span{display:block}
+.experiment-result{margin:0;min-width:0}
+.experiment-table{overflow-x:auto;max-width:100%;padding:8px;border-radius:14px;background:#f6f8fa;border:1px solid #dbe2e9;scrollbar-width:thin}
+.experiment-table .data-table{min-width:670px;font-variant-numeric:tabular-nums}
+.experiment-table .data-table caption{padding:12px 8px 16px;text-align:left;font-size:.92rem;font-weight:850;color:#24303d;background:#f6f8fa;caption-side:top}
+.experiment-table .data-table th{position:static;padding:11px 10px;font-size:.65rem}
+.experiment-table .data-table td{padding:11px 10px;font-size:.76rem}
+.experiment-table .data-table .experiment-best{background:#d8f2e2;color:#173d2a;font-weight:900}
+.experiment-table .data-table tbody tr:nth-child(even) td:not(.experiment-best){background:#f8fafc}
+#experiment-table-10 .data-table tr:nth-child(7) td,#experiment-table-13 .data-table tr:nth-child(3) td,#experiment-table-13 .data-table tr:nth-child(5) td,#experiment-table-13 .data-table tr:nth-child(7) td{border-top:2px solid #dbe2e9}
+.experiment-footnote{margin:0;color:var(--muted);font-size:.74rem;line-height:1.65}
+.result-provenance{margin:12px 8px 0;color:#536071;font-size:.74rem;line-height:1.6}
+:root[data-theme="light"] .experiment-tab{background:#fff;color:var(--muted)}
+:root[data-theme="light"] .experiment-tab.active{background:#e7f3f8;color:#005f80;border-color:rgba(0,111,149,.35)}
+@media(max-width:1200px){#confidence-eval .eval-shell{grid-template-columns:1fr}#confidence-eval .eval-tabs{display:flex;flex-wrap:wrap;gap:8px}#confidence-eval .eval-tab{flex:1 1 155px}#confidence-eval .eval-tab:hover,#confidence-eval .eval-tab.active{transform:none}}
+@media(max-width:720px){.experiment-tabs{gap:8px}.experiment-tab{padding:11px 14px;font-size:.76rem}.experiment-protocol{font-size:.8rem}#confidence-eval .eval-shell{padding:10px}#confidence-eval .eval-tabs{flex-wrap:nowrap;overflow-x:auto;padding:3px;scrollbar-width:thin}#confidence-eval .eval-tab{flex:0 0 auto;white-space:nowrap;padding:11px;font-size:.72rem}#confidence-eval figcaption{font-size:.78rem}.experiment-table{padding:5px}.experiment-table .data-table caption{font-size:.83rem}}
