@@ -2,8 +2,9 @@
 
 ## Hero background
 
-The three 15-second reels in `assets/video/hero/` use matching middle
-3-second excerpts from five chapter 3 tasks. `clips.json` records the source
+The three 15-second reels in `assets/video/hero/` show ground truth, predicted
+risk, and risk overlay (the default view), using matching middle 3-second
+excerpts from five chapter 3 tasks. `clips.json` records the source
 columns and exact frame ranges. Rebuild with:
 
 ```sh

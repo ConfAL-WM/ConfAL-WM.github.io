@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TASKS = (1, 3, 9, 12, 23)
-VIEWS = {"predicted": "02", "risk": "05", "overlay": "06"}
+VIEWS = {"ground-truth": "01", "risk": "05", "overlay": "06"}
 FPS = 10
 CLIP_FRAMES = 30
 

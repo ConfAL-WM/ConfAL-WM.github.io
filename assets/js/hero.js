@@ -7,7 +7,7 @@
   const controls = hero.querySelector('.hero-media-controls');
   const status = document.getElementById('heroMediaStatus');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  let active = videos[0];
+  let active = videos.find(video => video.classList.contains('is-active')) || videos[0];
   let userPaused = reducedMotion.matches;
   let visible = true;
   let switching = false;

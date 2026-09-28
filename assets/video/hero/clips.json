@@ -2,7 +2,7 @@
   "fps": 10,
   "duration_seconds": 15,
   "source_columns": {
-    "predicted": "02",
+    "ground-truth": "01",
     "risk": "05",
     "overlay": "06"
   },
