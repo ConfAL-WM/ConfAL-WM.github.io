@@ -1,0 +1,41 @@
+{
+  "fps": 10,
+  "duration_seconds": 15,
+  "source_columns": {
+    "predicted": "02",
+    "risk": "05",
+    "overlay": "06"
+  },
+  "clips": [
+    {
+      "task": "adjust_bottle",
+      "directory": "assets/confidence/group-01/task-01",
+      "start_frame": 54,
+      "end_frame_exclusive": 84
+    },
+    {
+      "task": "blocks_ranking_rgb",
+      "directory": "assets/confidence/group-01/task-03",
+      "start_frame": 218,
+      "end_frame_exclusive": 248
+    },
+    {
+      "task": "handover_block",
+      "directory": "assets/confidence/group-02/task-09",
+      "start_frame": 132,
+      "end_frame_exclusive": 162
+    },
+    {
+      "task": "lift_pot",
+      "directory": "assets/confidence/group-03/task-12",
+      "start_frame": 42,
+      "end_frame_exclusive": 72
+    },
+    {
+      "task": "place_bread_basket",
+      "directory": "assets/confidence/group-05/task-23",
+      "start_frame": 96,
+      "end_frame_exclusive": 126
+    }
+  ]
+}

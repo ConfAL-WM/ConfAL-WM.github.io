@@ -25,27 +25,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
 <style>
-@property --bg{syntax:"<color>";inherits:true;initial-value:#06080c}
-@property --bg2{syntax:"<color>";inherits:true;initial-value:#0a0d13}
-@property --surface{syntax:"<color>";inherits:true;initial-value:rgba(18,23,32,.76)}
-@property --surface2{syntax:"<color>";inherits:true;initial-value:rgba(12,16,23,.92)}
-@property --line{syntax:"<color>";inherits:true;initial-value:rgba(255,255,255,.095)}
-@property --line2{syntax:"<color>";inherits:true;initial-value:rgba(255,255,255,.16)}
-@property --text{syntax:"<color>";inherits:true;initial-value:#f4f7fb}
-@property --muted{syntax:"<color>";inherits:true;initial-value:#98a3b5}
 :root{
   --bg:#06080c; --bg2:#0a0d13; --surface:rgba(18,23,32,.76); --surface2:rgba(12,16,23,.92);
   --line:rgba(255,255,255,.095); --line2:rgba(255,255,255,.16); --text:#f4f7fb; --muted:#98a3b5;
   --cyan:#55d7ff; --blue:#6c8cff; --violet:#9b7cff; --amber:#ffbd66; --green:#65efad; --red:#ff7888;
   --rank1:rgba(57,211,126,.16); --rank2:rgba(255,205,84,.14); --rank3:rgba(255,108,121,.12);
   --shadow:0 24px 80px rgba(0,0,0,.34); --radius:22px; --page:min(88vw,1540px);
-  transition:--bg .42s ease,--bg2 .42s ease,--surface .42s ease,--surface2 .42s ease,--line .42s ease,--line2 .42s ease,--text .32s ease,--muted .32s ease;
 }
-*{box-sizing:border-box} html{scroll-behavior:smooth;scroll-padding-top:92px;background:var(--bg);transition:background-color .42s ease}
+*{box-sizing:border-box} html{scroll-behavior:smooth;scroll-padding-top:92px;background:var(--bg)}
+.theme-switching,.theme-switching *,.theme-switching *::before,.theme-switching *::after{transition:none!important}
 body{margin:0;background:
  radial-gradient(900px 520px at 8% 0%,rgba(86,213,255,.08),transparent 60%),
  radial-gradient(800px 500px at 94% 12%,rgba(154,124,255,.07),transparent 62%),var(--bg);
- color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;transition:background-color .42s ease,color .32s ease;
+ color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  line-height:1.55;overflow-x:hidden}
 a{color:inherit;text-decoration:none} button{font:inherit} ::selection{background:rgba(85,215,255,.25)}
 .progress-track{position:fixed;z-index:120;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.04)}
@@ -57,7 +49,25 @@ a{color:inherit;text-decoration:none} button{font:inherit} ::selection{backgroun
 .nav-link{padding:8px 11px;border-radius:999px;color:var(--muted);font-size:.78rem;font-weight:700;white-space:nowrap;transition:.2s}
 .nav-link:hover,.nav-link.active{color:var(--text);background:rgba(255,255,255,.07)}
 .hero{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden;padding:128px 4vw 76px;border-bottom:1px solid var(--line)}
-#hero-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.9}.hero-vignette{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,8,12,.12),rgba(6,8,12,.2) 55%,var(--bg) 100%),radial-gradient(circle at 50% 36%,transparent 0,rgba(6,8,12,.18) 60%,rgba(6,8,12,.72) 100%)}
+.hero-backdrop{position:absolute;inset:0;pointer-events:none;overflow:hidden;background:var(--bg)}
+.hero-backdrop video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(3px);transform:scale(1.025);opacity:.44;visibility:hidden}
+.hero-backdrop video.is-active{visibility:visible}
+.hero-vignette{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(6,8,12,.2),rgba(6,8,12,.28) 58%,var(--bg) 100%),radial-gradient(ellipse at 50% 45%,rgba(6,8,12,.35),transparent 75%)}
+.hero-media-controls{position:absolute;z-index:3;right:4vw;bottom:28px;display:flex;align-items:center;gap:10px}
+.hero-views{display:flex;gap:3px;padding:4px;border:1px solid var(--line2);border-radius:999px;background:var(--surface);backdrop-filter:blur(18px)}
+.hero-view,.hero-playback{border:0;cursor:pointer;color:var(--muted);background:transparent;font-size:.72rem;font-weight:750}
+.hero-view{padding:10px 13px;border-radius:999px;white-space:nowrap}
+.hero-view:hover{color:var(--text)}
+.hero-view[aria-pressed="true"]{color:var(--text);background:var(--surface2);box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.hero-playback{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;border:1px solid var(--line2);border-radius:50%;background:var(--surface);backdrop-filter:blur(18px);color:var(--text)}
+.hero-playback:hover{border-color:var(--cyan)}
+.hero-playback svg{width:17px;height:17px;fill:currentColor}
+.hero-playback .hero-play-icon,.hero-playback.is-paused .hero-pause-icon{display:none}
+.hero-playback.is-paused .hero-play-icon{display:block}
+.hero-view:focus-visible,.hero-playback:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.hero-media-status{position:absolute;right:0;bottom:56px;width:290px;margin:0;text-align:right;font-size:.72rem;color:var(--muted)}
+@media(max-width:960px){.hero{padding-bottom:145px}.hero-media-controls{bottom:24px}.hero .scroll-hint{left:4vw;transform:none;bottom:29px}}
+@media(max-width:480px){.hero{padding-bottom:164px}.hero-media-controls{left:0;right:0;justify-content:center;bottom:70px;gap:7px}.hero-view{padding:10px;font-size:.68rem}.hero .scroll-hint{left:50%;transform:translateX(-50%);bottom:15px}.hero .scroll-hint i{height:18px}.hero-media-status{right:5vw}}
 .hero-content{position:relative;z-index:2;width:min(1160px,94vw);text-align:center}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;border:1px solid rgba(85,215,255,.2);background:rgba(85,215,255,.055);color:#bfefff;font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .title{margin:20px auto 12px;font-size:clamp(3rem,7.3vw,7.4rem);line-height:.87;letter-spacing:-.075em;font-weight:900;text-wrap:balance}
 .title .wm{background:linear-gradient(105deg,#fff 20%,#b8f1ff 50%,#a697ff 84%);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -225,7 +235,8 @@ a{color:inherit;text-decoration:none} button{font:inherit} ::selection{backgroun
 }
 :root[data-theme="light"] .nav{background:rgba(255,255,255,.86);box-shadow:0 10px 36px rgba(35,57,89,.10)}
 :root[data-theme="light"] .nav-link:hover,:root[data-theme="light"] .nav-link.active{background:rgba(0,111,149,.08)}
-:root[data-theme="light"] .hero-vignette{background:linear-gradient(180deg,rgba(245,247,251,.12),rgba(245,247,251,.2) 55%,var(--bg) 100%),radial-gradient(circle at 50% 36%,transparent 0,rgba(245,247,251,.18) 60%,rgba(245,247,251,.72) 100%)}
+:root[data-theme="light"] .hero-backdrop video{opacity:.3}
+:root[data-theme="light"] .hero-vignette{background:linear-gradient(180deg,rgba(245,247,251,.12),rgba(245,247,251,.24) 58%,var(--bg) 100%),radial-gradient(ellipse at 50% 45%,rgba(245,247,251,.4),transparent 75%)}
 :root[data-theme="light"] .title .wm{background-image:linear-gradient(105deg,#18253a 20%,#006f95 52%,#7451c2 84%)}
 :root[data-theme="light"] .eyebrow{color:#006784;border-color:rgba(0,111,149,.22);background:rgba(0,111,149,.06)}
 :root[data-theme="light"] .subtitle,:root[data-theme="light"] .contrib p,:root[data-theme="light"] .citation pre{color:#465770}
@@ -292,7 +303,12 @@ a{color:inherit;text-decoration:none} button{font:inherit} ::selection{backgroun
 </div>
 
 <header class="hero" id="home">
-  <canvas id="hero-canvas" aria-hidden="true"></canvas><div class="hero-vignette"></div>
+  <div class="hero-backdrop" aria-hidden="true">
+    <video class="is-active" data-hero-view="predicted" src="assets/video/hero/predicted.mp4" poster="assets/video/hero/predicted-poster.jpg" muted loop playsinline preload="auto" tabindex="-1"></video>
+    <video data-hero-view="risk" src="assets/video/hero/risk.mp4" poster="assets/video/hero/risk-poster.jpg" muted loop playsinline preload="auto" tabindex="-1"></video>
+    <video data-hero-view="overlay" src="assets/video/hero/overlay.mp4" poster="assets/video/hero/overlay-poster.jpg" muted loop playsinline preload="auto" tabindex="-1"></video>
+  </div>
+  <div class="hero-vignette"></div>
   <div class="hero-content">
     <div class="eyebrow">Action-Conditioned World Models · Confidence · Active Learning</div>
     <h1 class="title">ConfAL<span class="wm">-WM</span></h1>
@@ -308,6 +324,18 @@ a{color:inherit;text-decoration:none} button{font:inherit} ::selection{backgroun
     <div class="coming-soon-toast" id="comingSoonToast" role="status" aria-live="polite"></div>
   </div>
   <a href="#overview" class="scroll-hint"><span>Explore</span><i></i></a>
+  <div class="hero-media-controls" role="group" aria-label="Background video controls">
+    <button class="hero-playback is-paused" id="heroPlayback" type="button" aria-label="Play background video" title="Play background video">
+      <svg class="hero-pause-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zm8 0h4v16h-4z"/></svg>
+      <svg class="hero-play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 4 14 8-14 8z"/></svg>
+    </button>
+    <div class="hero-views" role="group" aria-label="Background video view">
+      <button class="hero-view" type="button" data-view="predicted" aria-pressed="true">Only predicted</button>
+      <button class="hero-view" type="button" data-view="risk" aria-pressed="false">Risk</button>
+      <button class="hero-view" type="button" data-view="overlay" aria-pressed="false">Risk overlay</button>
+    </div>
+    <p class="hero-media-status" id="heroMediaStatus" role="status" aria-live="polite"></p>
+  </div>
 </header>
 
 <main class="page">
@@ -475,11 +503,16 @@ a{color:inherit;text-decoration:none} button{font:inherit} ::selection{backgroun
   const root = document.documentElement;
   const button = document.getElementById('themeToggle');
   function applyTheme(theme) {
+    // Suppress color transitions for this change, keeping normal hover effects.
+    root.classList.add('theme-switching');
+    void root.offsetWidth;
     root.dataset.theme = theme;
     const label = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
     button.setAttribute('aria-label', label);
     button.title = label;
     document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#07090d' : '#f5f7fb';
+    void root.offsetWidth;
+    root.classList.remove('theme-switching');
   }
   applyTheme(root.dataset.theme);
   button.addEventListener('click', () => {
@@ -518,7 +551,7 @@ const revealObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)
 // Asset helpers + video visibility optimization.
 function wireVideo(v){if(!v)return;const src=v.dataset.src;if(src){v.src=src;v.addEventListener('loadeddata',()=>v.closest('.asset-frame,.video-cell')?.classList.add('loaded','ready'),{once:true});v.addEventListener('error',()=>{}, {once:true})}}
 document.querySelectorAll('video[data-src]').forEach(wireVideo);
-const videoObs=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.play().catch(()=>{})}else v.pause()}),{rootMargin:'180px'});document.querySelectorAll('video').forEach(v=>videoObs.observe(v));
+const videoObs=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.play().catch(()=>{})}else v.pause()}),{rootMargin:'180px'});document.querySelectorAll('video:not([data-hero-view])').forEach(v=>videoObs.observe(v));
 document.querySelectorAll('.asset-frame img').forEach(img=>{if(img.complete&&img.naturalWidth)img.closest('.asset-frame')?.classList.add('loaded');img.addEventListener('load',()=>img.closest('.asset-frame')?.classList.add('loaded'));img.addEventListener('error',()=>{img.style.display='none'})});
 
 // Overview teaser: video by default, figure/video toggle, sound chip on the card, autoplay only when scrolled into view.
@@ -549,10 +582,6 @@ if(ovFrame&&ovVideo&&ovSound){
   ovAutoObs.observe(ovVideo);
   videoObs.unobserve(ovVideo); // the teaser manages its own play/pause lifecycle
 }
-
-// Hero: action-conditioned trajectory / future-state line field.
-(()=>{const c=document.getElementById('hero-canvas'),ctx=c.getContext('2d');let W,H,dpr=Math.min(devicePixelRatio||1,2),mx=.5,my=.5,t=0;const paths=Array.from({length:5},(_,i)=>({y:.12+i*.17+Math.random()*.03,phase:Math.random()*6.28,speed:.28+Math.random()*.55,amp:.025+Math.random()*.045,alpha:.21+Math.random()*.14,hue:i%3}));function resize(){W=c.clientWidth;H=c.clientHeight;c.width=W*dpr;c.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)} addEventListener('resize',resize);resize();addEventListener('pointermove',e=>{mx=e.clientX/innerWidth;my=e.clientY/innerHeight},{passive:true});function draw(){t+=.008;ctx.clearRect(0,0,W,H);ctx.save();ctx.translate((mx-.5)*8,(my-.5)*6);const cols=['85,215,255','155,124,255','255,189,102'];paths.forEach((p,i)=>{const y0=p.y*H;ctx.beginPath();for(let s=0;s<=80;s++){const x=s/80*W;const bend=Math.sin(s*.15+p.phase+t*p.speed)*p.amp*H;const attract=(.5-Math.abs(s/80-.5))*18*Math.sin(t+i);const y=y0+bend+attract;if(!s)ctx.moveTo(x,y);else ctx.lineTo(x,y)}ctx.strokeStyle=`rgba(${cols[p.hue]},${p.alpha})`;ctx.lineWidth=i%4===0?2.6:1.7;ctx.stroke();if(i%7===0){const q=(t*p.speed*.22+p.phase/6.28)%1,x=q*W,y=y0+Math.sin(q*80*.15+p.phase+t*p.speed)*p.amp*H;ctx.fillStyle=`rgba(${cols[p.hue]},.34)`;ctx.beginPath();ctx.arc(x,y,2.4,0,6.28);ctx.fill()}}); // reference/future planes
-ctx.strokeStyle='rgba(85,215,255,.14)';for(let k=0;k<4;k++){const x=W*.09+k*16,y=H*.3+k*9;ctx.strokeRect(x,y,120,74)}ctx.strokeStyle='rgba(155,124,255,.15)';for(let k=0;k<5;k++){const x=W*.79+k*18,y=H*.27+k*10;ctx.strokeRect(x,y,130,80)}ctx.restore();requestAnimationFrame(draw)}draw()})();
 
 // Confidence gallery: 10 groups x 5 tasks x 6 videos, pixel/latent space toggle for cols 1/2/6.
 let confGroup=0,confSpace='pixel';
@@ -666,5 +695,6 @@ tabs.forEach(b=>b.onclick=()=>{tabs.forEach(x=>x.classList.toggle('active',x===b
 // Citation + top.
 document.getElementById('copyBib').onclick=async()=>{const b=document.getElementById('copyBib'),label=b.querySelector('span');try{await navigator.clipboard.writeText(document.getElementById('bibtex').innerText);label.textContent='Copied ✓';setTimeout(()=>label.textContent='Copy BibTeX',1600)}catch{label.textContent='Select & copy'}};document.getElementById('backTop').onclick=()=>scrollTo({top:0,behavior:'smooth'});
 </script>
+<script src="assets/js/hero.js"></script>
 </body>
 </html>
