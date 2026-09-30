@@ -313,9 +313,9 @@ a{color:inherit;text-decoration:none} button{font:inherit} ::selection{backgroun
 
 <header class="hero" id="home">
   <div class="hero-backdrop" aria-hidden="true">
-    <video data-hero-view="ground-truth" src="assets/video/hero/ground-truth.mp4" poster="assets/video/hero/ground-truth-poster.jpg" muted loop playsinline preload="auto" tabindex="-1"></video>
-    <video data-hero-view="risk" src="assets/video/hero/risk.mp4" poster="assets/video/hero/risk-poster.jpg" muted loop playsinline preload="auto" tabindex="-1"></video>
-    <video class="is-active" data-hero-view="overlay" src="assets/video/hero/overlay.mp4" poster="assets/video/hero/overlay-poster.jpg" muted loop playsinline preload="auto" tabindex="-1"></video>
+    <video data-hero-view="ground-truth" data-src="assets/video/hero/ground-truth.mp4" poster="assets/video/hero/ground-truth-poster.jpg" muted loop playsinline preload="none" tabindex="-1"></video>
+    <video data-hero-view="risk" data-src="assets/video/hero/risk.mp4" poster="assets/video/hero/risk-poster.jpg" muted loop playsinline preload="none" tabindex="-1"></video>
+    <video class="is-active" data-hero-view="overlay" data-src="assets/video/hero/overlay.mp4" poster="assets/video/hero/overlay-poster.jpg" muted loop playsinline preload="none" tabindex="-1"></video>
   </div>
   <div class="hero-vignette"></div>
   <div class="hero-content">
@@ -362,7 +362,7 @@ a{color:inherit;text-decoration:none} button{font:inherit} ::selection{backgroun
     </div>
     <div class="asset-frame ov-frame" id="overview-frame" data-ov="video">
       <img class="ov-media ov-fig" src="assets/figures/overview_introduction.png" alt="ConfAL-WM overview figure" loading="lazy">
-      <video class="ov-media ov-vid" id="overview-video" controls loop playsinline preload="metadata" src="assets/video/ConfAL-WM.mp4"></video>
+      <video class="ov-media ov-vid" id="overview-video" controls loop playsinline preload="auto" src="assets/video/ConfAL-WM.mp4?v=faststart1"></video>
     </div>
   </div>
   <div class="contrib-grid">
@@ -550,9 +550,24 @@ function onScroll(){const h=document.documentElement.scrollHeight-innerHeight;pr
 const revealObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.08});document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
 
 // Asset helpers + video visibility optimization.
-function wireVideo(v){if(!v)return;const src=v.dataset.src;if(src){v.src=src;v.addEventListener('loadeddata',()=>v.closest('.asset-frame,.video-cell')?.classList.add('loaded','ready'),{once:true});v.addEventListener('error',()=>{}, {once:true})}}
-document.querySelectorAll('video[data-src]').forEach(wireVideo);
-const videoObs=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.play().catch(()=>{})}else v.pause()}),{rootMargin:'180px'});document.querySelectorAll('video:not([data-hero-view])').forEach(v=>videoObs.observe(v));
+function loadVideo(v){
+  if(!v.dataset.src||v.getAttribute('src'))return;
+  v.preload='auto';v.src=v.dataset.src;v.load();
+}
+function wireVideo(v){
+  if(!v)return;
+  v.addEventListener('loadeddata',()=>v.closest('.asset-frame,.video-cell')?.classList.add('loaded','ready'),{once:true});
+  videoObs.observe(v);
+}
+const videoObs=new IntersectionObserver(es=>es.forEach(e=>{
+  const v=e.target;
+  if(e.isIntersecting){loadVideo(v);v.play().catch(()=>{})}else v.pause();
+}),{rootMargin:'180px'});
+function clearVideos(parent){parent.querySelectorAll('video').forEach(v=>{
+  videoObs.unobserve(v);v.pause();delete v.dataset.src;v.removeAttribute('src');v.load();
+})}
+document.querySelectorAll('video[data-src]:not([data-hero-view])').forEach(wireVideo);
+
 document.querySelectorAll('.asset-frame img').forEach(img=>{if(img.complete&&img.naturalWidth)img.closest('.asset-frame')?.classList.add('loaded');img.addEventListener('load',()=>img.closest('.asset-frame')?.classList.add('loaded'));img.addEventListener('error',()=>{img.style.display='none'})});
 
 // Overview teaser: video by default, figure/video toggle, sound chip on the card, autoplay only when scrolled into view.
@@ -587,8 +602,8 @@ if(ovFrame&&ovVideo&&ovSound){
 // Confidence gallery: 10 groups x 5 tasks x 6 videos, pixel/latent space toggle for cols 1/2/6.
 let confGroup=0,confSpace='pixel';
 const CONF_COL_LABELS={pixel:['Ground-truth frame','Predicted frame','Predicted latent error','Predicted confidence','Predicted risk','Risk overlay'],latent:['GT latent magnitude','Pred latent magnitude','Predicted latent error','Predicted confidence','Predicted risk','Risk overlay on latent']};
-function replayRow(btn,videos){btn.classList.add('spinning');setTimeout(()=>btn.classList.remove('spinning'),700);videos.forEach(v=>{try{v.pause();v.currentTime=0;const p=v.play();if(p&&p.catch)p.catch(()=>{})}catch(e){}})}
-function renderConfidence(){const m=document.getElementById('confidenceMatrix');m.innerHTML='';const cols=CONF_COL_LABELS[confSpace];m.insertAdjacentHTML('beforeend','<div></div>'+cols.map(x=>`<div class="matrix-head">${x}</div>`).join(''));const start=confGroup*5;CONF_TASKS.slice(start,start+5).forEach((task,ri)=>{const rowVideos=[];m.insertAdjacentHTML('beforeend',`<div class="task-label"><b>${task.name}</b><small>${task.id}</small><button class="replay-btn" title="Replay this row"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Replay</button></div>`);const lbl=m.lastElementChild;cols.forEach((_,ci)=>{const g=`group-${String(confGroup+1).padStart(2,'0')}`;const slot=String(ci+1).padStart(2,'0');const suffix=(confSpace==='latent'&&[0,1,5].includes(ci))?'l':'';const file=`assets/confidence/${g}/${task.id}/${slot}${suffix}.mp4`;m.insertAdjacentHTML('beforeend',`<div class="video-cell"><video muted loop playsinline preload="metadata" data-src="${file}"></video><div class="media-todo">TODO<br>${slot}${suffix}.mp4</div></div>`);rowVideos.push(m.lastElementChild.querySelector('video'))});lbl.querySelector('.replay-btn').onclick=e=>replayRow(e.currentTarget,rowVideos)});m.querySelectorAll('video').forEach(v=>{wireVideo(v);videoObs.observe(v)});document.getElementById('confCounter').textContent=`Group ${confGroup+1} / 10 · Tasks ${start+1}–${start+5}`;document.getElementById('confSpaceLabel').textContent=confSpace==='pixel'?'Pixel space ⇄ Latent space':'Latent space ⇄ Pixel space';document.getElementById('confSpace').classList.toggle('active-space',confSpace==='latent')}
+function replayRow(btn,videos){btn.classList.add('spinning');setTimeout(()=>btn.classList.remove('spinning'),700);videos.forEach(v=>{try{loadVideo(v);v.pause();v.currentTime=0;const p=v.play();if(p&&p.catch)p.catch(()=>{})}catch(e){}})}
+function renderConfidence(){const m=document.getElementById('confidenceMatrix');clearVideos(m);m.innerHTML='';const cols=CONF_COL_LABELS[confSpace];m.insertAdjacentHTML('beforeend','<div></div>'+cols.map(x=>`<div class="matrix-head">${x}</div>`).join(''));const start=confGroup*5;CONF_TASKS.slice(start,start+5).forEach((task,ri)=>{const rowVideos=[];m.insertAdjacentHTML('beforeend',`<div class="task-label"><b>${task.name}</b><small>${task.id}</small><button class="replay-btn" title="Replay this row"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Replay</button></div>`);const lbl=m.lastElementChild;cols.forEach((_,ci)=>{const g=`group-${String(confGroup+1).padStart(2,'0')}`;const slot=String(ci+1).padStart(2,'0');const suffix=(confSpace==='latent'&&[0,1,5].includes(ci))?'l':'';const file=`assets/confidence/${g}/${task.id}/${slot}${suffix}.mp4`;m.insertAdjacentHTML('beforeend',`<div class="video-cell"><video muted loop playsinline preload="none" data-src="${file}"></video><div class="media-todo">Loading video</div></div>`);rowVideos.push(m.lastElementChild.querySelector('video'))});lbl.querySelector('.replay-btn').onclick=e=>replayRow(e.currentTarget,rowVideos)});m.querySelectorAll('video').forEach(v=>{wireVideo(v)});document.getElementById('confCounter').textContent=`Group ${confGroup+1} / 10 · Tasks ${start+1}–${start+5}`;document.getElementById('confSpaceLabel').textContent=confSpace==='pixel'?'Pixel space ⇄ Latent space':'Latent space ⇄ Pixel space';document.getElementById('confSpace').classList.toggle('active-space',confSpace==='latent')}
 function moveConf(d){confGroup=(confGroup+d+10)%10;document.getElementById('confRange').value=confGroup+1;renderConfidence()}document.getElementById('confPrev').onclick=()=>moveConf(-1);document.getElementById('confNext').onclick=()=>moveConf(1);document.getElementById('confRange').oninput=e=>{confGroup=Number(e.target.value)-1;renderConfidence()};document.getElementById('confSpace').onclick=()=>{confSpace=confSpace==='pixel'?'latent':'pixel';renderConfidence()};renderConfidence();
 
 // Ranking helpers.
@@ -670,10 +685,10 @@ function episodeMetricTable(ep){
   return h+'</tbody></table></div>';
 }
 function renderEvolution(){
-  const box=document.getElementById('evolutionList');box.innerHTML='';
+  const box=document.getElementById('evolutionList');clearVideos(box);box.innerHTML='';
   const eps=EVO_PAGES[evoGroup];
-  eps.forEach(ep=>{const vids=VIDEO_FILES.map((f,i)=>`<div class="evo-video-item"><div class="mini-title">${VIDEO_TITLES[i]}</div><div class="video-cell"><video muted loop playsinline preload="metadata" data-src="assets/evolution/${ep.id}/${f}.mp4"></video><div class="media-todo">TODO · ${f}.mp4</div></div></div>`).join('');box.insertAdjacentHTML('beforeend',`<article class="evolution-row card"><div><div class="episode-head"><b>${ep.name}</b><span>${ep.id}</span><button class="replay-btn" title="Replay this row"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Replay</button></div><div class="five-videos">${vids}</div></div><div class="episode-metrics-side"><div class="episode-head"><b>Episode metrics</b><span>4 stages</span></div>${episodeMetricTable(ep)}</div></article>`);const row=box.lastElementChild;row.querySelector('.replay-btn').onclick=e=>replayRow(e.currentTarget,[...row.querySelectorAll('video')])});
-  box.querySelectorAll('video').forEach(v=>{wireVideo(v);videoObs.observe(v)});
+  eps.forEach(ep=>{const vids=VIDEO_FILES.map((f,i)=>`<div class="evo-video-item"><div class="mini-title">${VIDEO_TITLES[i]}</div><div class="video-cell"><video muted loop playsinline preload="none" data-src="assets/evolution/${ep.id}/${f}.mp4"></video><div class="media-todo">Loading video</div></div></div>`).join('');box.insertAdjacentHTML('beforeend',`<article class="evolution-row card"><div><div class="episode-head"><b>${ep.name}</b><span>${ep.id}</span><button class="replay-btn" title="Replay this row"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Replay</button></div><div class="five-videos">${vids}</div></div><div class="episode-metrics-side"><div class="episode-head"><b>Episode metrics</b><span>4 stages</span></div>${episodeMetricTable(ep)}</div></article>`);const row=box.lastElementChild;row.querySelector('.replay-btn').onclick=e=>replayRow(e.currentTarget,[...row.querySelectorAll('video')])});
+  box.querySelectorAll('video').forEach(v=>{wireVideo(v)});
   const counts=EVO_PAGES.map(p=>p.length);const before=counts.slice(0,evoGroup).reduce((a,b)=>a+b,0);document.getElementById('evoCounter').textContent=`Group ${evoGroup+1} / ${EVO_GROUP_COUNT} · Episodes ${before+1}–${before+counts[evoGroup]} of 10`;document.getElementById('evoRange').value=evoGroup+1;
 }
 function moveEvo(d){evoGroup=(evoGroup+d+EVO_GROUP_COUNT)%EVO_GROUP_COUNT;renderEvolution()}document.getElementById('evoPrev').onclick=()=>moveEvo(-1);document.getElementById('evoNext').onclick=()=>moveEvo(1);document.getElementById('evoRange').oninput=e=>{evoGroup=Number(e.target.value)-1;renderEvolution()};renderEvolution();
@@ -690,7 +705,7 @@ document.getElementById('evoReplayAll').onclick=e=>replayAll(e.currentTarget,'ev
 // Citation + top.
 document.getElementById('copyBib').onclick=async()=>{const b=document.getElementById('copyBib'),label=b.querySelector('span');try{await navigator.clipboard.writeText(document.getElementById('bibtex').innerText);label.textContent='Copied ✓';setTimeout(()=>label.textContent='Copy BibTeX',1600)}catch{label.textContent='Select & copy'}};document.getElementById('backTop').onclick=()=>scrollTo({top:0,behavior:'smooth'});
 </script>
-<script src="assets/js/hero.js"></script>
+<script src="assets/js/hero.js?v=lazy1"></script>
 <script src="assets/js/experiments.js"></script>
 </body>
 </html>

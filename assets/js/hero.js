@@ -22,6 +22,7 @@
 
   function resume() {
     if (!userPaused && visible && !document.hidden && !switching) {
+      loadVideo(active);
       active.play().catch(() => updatePlayback());
     } else {
       active.pause();
@@ -59,6 +60,7 @@
     videos.forEach(video => video.pause());
     const time = active.currentTime;
     try {
+      loadVideo(target);
       await waitFor(target, 'loadeddata', () => target.readyState >= 2);
       if (request !== revision) return;
       if (Math.abs(target.currentTime - time) > 0.001) target.currentTime = time;
